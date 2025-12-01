@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$RIGBY | The Derpiest Cat</title>
+    
+    <!-- Tailwind CSS (via CDN for instant styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons (via CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+        /* Custom Fonts & Animations */
+        .comic-font {
+            font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+
+        /* Wiggle Hover Effect */
+        .wiggle:hover {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* 3D Coin Float Animation */
+        @keyframes coin-float {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(10deg); }
+        }
+        .animate-coin {
+            animation: coin-float 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        
+        /* Hide scrollbar for mobile menu aesthetics */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-yellow-400 font-sans overflow-x-hidden text-gray-900">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Logo Brand -->
+            <div class="flex items-center gap-2">
+                <img 
+                    src="images/logo512011236.png" 
+                    alt="$RIGBY Logo" 
+                    class="w-12 h-12 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:rotate-12 transition-transform"
+                    onerror="this.src='https://placehold.co/100x100/orange/white?text=RIGBY'"
+                >
+                <span class="text-2xl font-black tracking-tighter italic comic-font">$RIGBY</span>
+            </div>
+
+            <!-- Desktop Socials -->
+            <div class="hidden md:flex gap-6">
+                <a href="https://www.instagram.com/iamrigbycat/?hl=en" target="_blank" class="hover:text-pink-600 transition-transform hover:scale-125" title="Instagram">
+                    <i data-lucide="instagram"></i>
+                </a>
+                <a href="https://x.com/i/communities/1995444288327397832" target="_blank" class="hover:text-blue-400 transition-transform hover:scale-125" title="X Community">
+                    <!-- Using X icon specifically -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@iamrigbycat?lang=en" target="_blank" class="hover:text-black transition-transform hover:scale-125" title="TikTok">
+                    <i data-lucide="music"></i>
+                </a>
+                <a href="https://t.me/rigbycommunity" target="_blank" class="hover:text-blue-500 transition-transform hover:scale-125" title="Telegram">
+                    <i data-lucide="send"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden">
+                <i id="menu-icon-open" data-lucide="menu" class="w-8 h-8"></i>
+                <i id="menu-icon-close" data-lucide="x" class="w-8 h-8 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b-4 border-black p-4 flex flex-col gap-4 shadow-xl">
+            <a href="https://www.instagram.com/iamrigbycat/?hl=en" target="_blank" class="flex items-center gap-3 text-xl font-bold p-2 hover:bg-yellow-100 rounded-lg">
+                <i data-lucide="instagram"></i> Instagram
+            </a>
+            <a href="https://x.com/i/communities/1995444288327397832" target="_blank" class="flex items-center gap-3 text-xl font-bold p-2 hover:bg-yellow-100 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> X Community
+            </a>
+            <a href="https://www.tiktok.com/@iamrigbycat?lang=en" target="_blank" class="flex items-center gap-3 text-xl font-bold p-2 hover:bg-yellow-100 rounded-lg">
+                <i data-lucide="music"></i> TikTok
+            </a>
+            <a href="https://t.me/rigbycommunity" target="_blank" class="flex items-center gap-3 text-xl font-bold p-2 hover:bg-yellow-100 rounded-lg">
+                <i data-lucide="send"></i> Telegram
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 px-4 text-center relative overflow-hidden">
+        <!-- Floating emojis -->
+        <div class="absolute top-10 left-10 text-6xl opacity-20 animate-bounce">🐱</div>
+        <div class="absolute bottom-20 right-10 text-6xl opacity-20 animate-bounce" style="animation-delay: 0.7s">🦴</div>
+        
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-8">
+            <div class="relative group cursor-pointer perspective-1000">
+                <!-- Shadow -->
+                <div class="absolute inset-0 bg-black rounded-full translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform opacity-50 blur-sm"></div>
+                
+                <!-- Main Coin Image -->
+                <img 
+                    src="images/logo512011236.png" 
+                    alt="Rigby Hero Coin" 
+                    class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-yellow-600 object-cover z-10 animate-coin shadow-[inset_0_0_40px_rgba(255,255,255,0.4)]"
+                    onerror="this.src='https://placehold.co/400x400/orange/white?text=RIGBY'"
+                >
+                
+                <div class="absolute -bottom-4 -right-4 bg-pink-500 text-white font-bold py-2 px-6 rounded-full border-2 border-black rotate-12 z-20 comic-font text-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:scale-110 transition-transform">
+                    Much Meow!
+                </div>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-black text-white stroke-black drop-shadow-[6px_6px_0px_rgba(0,0,0,1)] comic-font wiggle">
+                $RIGBY
+            </h1>
+            
+            <p class="text-2xl md:text-3xl font-bold bg-white inline-block px-6 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -rotate-2">
+                The Derpiest Cat on the Blockchain
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <a 
+                    href="https://t.me/rigbycommunity" 
+                    target="_blank"
+                    class="bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold py-4 px-8 rounded-xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 transition-all flex items-center gap-2"
+                >
+                    <i data-lucide="send"></i> Join Telegram
+                </a>
+                <a 
+                    href="https://x.com/i/communities/1995444288327397832" 
+                    target="_blank"
+                    class="bg-black hover:bg-gray-800 text-white text-xl font-bold py-4 px-8 rounded-xl border-4 border-transparent shadow-[6px_6px_0px_0px_rgba(255,255,255,0.5)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center gap-2"
+                >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Join Community
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scrolling Marquee -->
+    <div class="bg-pink-500 border-y-4 border-black py-4 overflow-hidden relative">
+        <div class="whitespace-nowrap animate-marquee">
+            <span class="text-3xl md:text-5xl font-black text-white mx-4 comic-font">
+                ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️
+            </span>
+            <span class="text-3xl md:text-5xl font-black text-white mx-4 comic-font">
+                ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️ CA WILL BE ADDED AFTER DEPLOY ⚠️
+            </span>
+        </div>
+    </div>
+
+    <!-- Lore Section -->
+    <section class="py-20 px-4 bg-white relative">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-5xl md:text-7xl font-black text-center mb-16 comic-font relative inline-block left-1/2 -translate-x-1/2">
+                THE LORE
+                <div class="absolute -top-6 -right-12 text-6xl animate-pulse">📜</div>
+                <div class="absolute -bottom-2 left-0 w-full h-4 bg-yellow-400 -z-10 -rotate-2"></div>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Image Container -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-yellow-400 rounded-3xl rotate-3 border-4 border-black"></div>
+                    <img 
+                        src="images/1231.png" 
+                        alt="Real Rigby" 
+                        class="relative w-full rounded-3xl border-4 border-black shadow-xl -rotate-3 hover:rotate-0 transition-transform duration-500"
+                        onerror="this.src='https://placehold.co/600x600/gray/white?text=Real+Rigby'"
+                    >
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20">
+                        <p class="font-bold text-lg comic-font">"Blep." - Rigby</p>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-6 text-xl md:text-2xl font-bold text-gray-800 comic-font">
+                    <div class="bg-blue-100 p-6 rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-2 transition-transform">
+                        <p>
+                            Born from the depths of the internet and fueled by pure chaotic energy, <span class="text-pink-600">$RIGBY</span> is not just a cat. He is a movement. A lifestyle. A state of mind.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-green-100 p-6 rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-2 transition-transform delay-100">
+                        <p>
+                            Legend says that every time Rigby sticks his tongue out, the chart goes up. Don't fact check that. Just believe in the power of the <span class="text-purple-600 underline decoration-wavy">cat</span>.
+                        </p>
+                    </div>
+
+                    <div class="bg-pink-100 p-6 rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-2 transition-transform delay-200">
+                        <p>
+                            No roadmap. No complex utility. Just a really funny cat doing funny cat things.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="py-20 px-4 bg-purple-600 text-white text-center">
+        <div class="container mx-auto max-w-3xl">
+            <div class="bg-white text-black p-8 md:p-12 rounded-3xl border-8 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,0.5)] relative overflow-visible">
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-red-500 text-white font-black py-2 px-8 rounded-full border-4 border-black text-xl md:text-2xl shadow-lg whitespace-nowrap">
+                    ❤️ IMPORTANT MISSION ❤️
+                </div>
+                
+                <div class="mt-8 space-y-6">
+                    <h3 class="text-3xl md:text-4xl font-black comic-font uppercase text-purple-600">
+                        For the Real Rigby
+                    </h3>
+                    
+                    <p class="text-xl md:text-2xl font-bold leading-relaxed">
+                        We love cats, and we love Rigby. That's why <span class="bg-yellow-300 px-2 border-2 border-black inline-block -rotate-1">part of the creator fees</span> will be sent directly to the Cat Owner!
+                    </p>
+                    
+                    <div class="flex flex-col gap-4 bg-gray-100 p-6 rounded-xl border-2 border-dashed border-gray-400">
+                        <div class="flex items-start gap-3 text-left">
+                            <div class="bg-green-500 text-white p-1 rounded-full mt-1">
+                                <i data-lucide="heart" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <p class="font-semibold text-lg">We are actively trying to reach him right now.</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <div class="bg-green-500 text-white p-1 rounded-full mt-1">
+                                <i data-lucide="heart" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <p class="font-semibold text-lg">A portion of tokens is <span class="text-green-600 font-black">ALREADY SECURED</span> specifically for this purpose.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-500 italic">
+                        If you are the owner of Rigby, please contact us on X or Telegram!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4 border-t-8 border-yellow-400">
+        <div class="container mx-auto text-center space-y-8">
+            <div class="flex justify-center items-center gap-4 animate-bounce">
+                <img 
+                    src="images/logo512011236.png" 
+                    alt="Rigby Footer Coin" 
+                    class="w-16 h-16 rounded-full border-2 border-white"
+                    onerror="this.src='https://placehold.co/100x100/orange/white?text=RIGBY'"
+                >
+                <h2 class="text-4xl font-black comic-font text-yellow-400">$RIGBY</h2>
+            </div>
+            
+            <div class="flex justify-center gap-8 flex-wrap">
+                <a href="https://www.instagram.com/iamrigbycat/?hl=en" target="_blank" class="hover:text-yellow-400 transition-colors transform hover:scale-110 flex flex-col items-center gap-2">
+                    <i data-lucide="instagram"></i> <span class="font-bold">Instagram</span>
+                </a>
+                <a href="https://x.com/i/communities/1995444288327397832" target="_blank" class="hover:text-yellow-400 transition-colors transform hover:scale-110 flex flex-col items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> <span class="font-bold">X Community</span>
+                </a>
+                <a href="https://www.tiktok.com/@iamrigbycat?lang=en" target="_blank" class="hover:text-yellow-400 transition-colors transform hover:scale-110 flex flex-col items-center gap-2">
+                    <i data-lucide="music"></i> <span class="font-bold">TikTok</span>
+                </a>
+                <a href="https://t.me/rigbycommunity" target="_blank" class="hover:text-yellow-400 transition-colors transform hover:scale-110 flex flex-col items-center gap-2">
+                    <i data-lucide="send"></i> <span class="font-bold">Telegram</span>
+                </a>
+            </div>
+
+            <p class="text-gray-500 text-sm font-mono mt-8">
+                $RIGBY is a memecoin for entertainment purposes only. <br/>
+                Don't spend money you need for cat food.
+            </p>
+            
+            <p class="text-xs text-gray-700">
+                © 2024 Rigby Community. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
+
+        // 2. Navbar Scroll Effect
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-lg', 'py-2');
+                nav.classList.remove('bg-transparent', 'py-4');
+            } else {
+                nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-lg', 'py-2');
+                nav.classList.add('bg-transparent', 'py-4');
+            }
+        });
+
+        // 3. Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+        
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
